@@ -8,7 +8,7 @@
 
 ## :rocket: Tecologias Usadas
 
-• Technologies usada no projeto:
+• Tecnologia usada no projeto:
 
 - [React-Native](https://reactnative.dev/)
 
