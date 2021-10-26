@@ -19,11 +19,12 @@ export default class App extends Component {
 
   //evento quando apertar nos numberos
   addDigit = num => {
-    if(num === '.' && this.state.displayValue.includes('.')){ //nao pode inserir 2x o ponto (.)
+    
+    const clearDisplay = this.state.displayValue === '0' || this.state.clearDisplay;
+    
+    if(num === '.' && !clearDisplay && this.state.displayValue.includes('.')){ //nao pode inserir 2x o ponto (.)
       return;
     }
-
-    const clearDisplay = this.state.displayValue === '0' || this.state.clearDisplay;
     const currentValue = clearDisplay ? '' : this.state.displayValue;
     const displayValue = currentValue + num; // concat de string
     this.setState({displayValue, clearDisplay: false});
@@ -54,7 +55,7 @@ export default class App extends Component {
       }
       values[1]= 0;
       this.setState({
-        displayValue: values[0],
+        displayValue: `${values[0]}`,
         operation: equals ? null : operation,
         current: equals ? 0 : 1,
         clearDisplay: !equals,
