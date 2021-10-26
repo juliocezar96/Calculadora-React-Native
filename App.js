@@ -4,19 +4,41 @@ import { View, StyleSheet, Text, Platform } from 'react-native';
 import Display from './src/components/Display';
 import Button from './src/components/Button';
 
+
+const initialState = {
+  displayValue: '0',
+  clearDisplay : false,
+  operation: null,
+  values: [0,0],
+  current: 0,
+}
+
 export default class App extends Component {
 
-  state = {
-    displayValue: '0'
-  }
+  state = {... initialState }
 
   //evento quando apertar nos numberos
-  addDigit = n => {
-    this.setState ({ displayValue : n})
+  addDigit = num => {
+    if(num === '.' && this.state.displayValue.includes('.')){ //nao pode inserir 2x o ponto (.)
+      return;
+    }
+
+    const clearDisplay = this.state.displayValue === '0' || this.state.clearDisplay;
+    const currentValue = clearDisplay ? '' : this.state.displayValue;
+    const displayValue = currentValue + num; // concat de string
+    this.setState({displayValue, clearDisplay: false});
+
+    if(num !== ''){
+      const newValue = parseFloat(displayValue);
+      const values = [... this.state.values];
+      values[this.state.current] = newValue;
+      this.setState({values});
+    }
+
   }
   //limpar memoria
   cleaMemory = () => {
-    this.setState ({ displayValue : '0'})
+    this.setState ({... initialState});
   }
   //evento quando apertar nos operadores
   setOperation = operation => {

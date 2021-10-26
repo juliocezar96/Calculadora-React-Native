@@ -34,9 +34,15 @@ export default props => {
 
     const styleButton = [styles.button];
 
-    if(props.double) styleButton.push(styles.buttonDouble)
-    if(props.triple) styleButton.push(styles.buttonTriple)
-    if(props.operation) styleButton.push(styles.operationButton)
+    if(props.double){
+        styleButton.push(styles.buttonDouble)
+    } 
+    if(props.triple){
+        styleButton.push(styles.buttonTriple)
+    } 
+    if(props.operation){
+        styleButton.push(styles.operationButton)
+    } 
     
     return (
         <TouchableHighlight onPress={() => props.onClick(props.label)}>
